@@ -1,0 +1,5 @@
+audioFile.mp3
+.idea
+__pycache__
+.cache
+tokens.yaml
