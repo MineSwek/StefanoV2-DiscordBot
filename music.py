@@ -206,43 +206,6 @@ class MusicCog(commands.Cog):
                 self.nextsong()
                 await self.editkolej()
 
-    @commands.command()
-    async def musicsetup(self, ctx):
-        global kanalmid
-        global kanalw
-        if not discord.utils.get(ctx.guild.channels, name="stefano-music"):
-            guild = ctx.message.guild
-            await guild.create_text_channel('stefano-music')
-            channel = discord.utils.get(ctx.guild.channels, name="stefano-music")
-            file = open("idkanalumuzycznego.txt", "w")
-            file.write(str(channel.id) + "\n")
 
-            kanalmid = channel.id
-
-
-            embed.set_author(name="Stefano - Komendy do korzystania z bota: ")
-
-            embed.add_field(name="leave", value="Wyjście bota z kanału")
-            embed.add_field(name="pause", value="Pauzuje aktualną muzykę")
-            embed.add_field(name="resume", value="Wznawia aktualną muzykę")
-            embed.add_field(name="skip", value="Pomiją aktualną muzykę")
-            embed.add_field(name="remove [id]", value="Pomiją aktualną muzykę")
-            embed.add_field(name="shuffle", value="Miesza playliste")
-            embed.add_field(name="move [nr] [nr]", value="Zamienia piosenki miejscami")
-            embed.add_field(name="Dodawanie piosenek", value="Aby dodać piosenkę do kolejki po prostu wpisz jej nazwę tutaj!", inline=False)
-            await channel.send(embed=embed)
-            embed.set_author(name="Aktualna piosenka")
-            embed.clear_fields()
-            embed.set_image(url="")
-            await channel.send('**Kolejka:\n**', embed=embed)
-            kanal = self.client.get_channel(int(kanalmid))
-            kanal = await kanal.history(limit=2)
-            file.write(str(kanal[0].id) + "\n")
-            kanalw = kanal[0].id
-
-        else:
-            await ctx.send("Kanał już istnieje!")
-
-
-async def setup(client):
-    await client.add_cog(MusicCog(client))
+def setup(client):
+    client.add_cog(MusicCog(client))
